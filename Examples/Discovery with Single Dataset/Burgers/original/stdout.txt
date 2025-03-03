@@ -1,0 +1,23 @@
+Training Error u: 7.659361e-02 
+Validation Error u: 7.729327e-02 
+Training time: 422.8184 
+Full Field Error u: 1.403890e-02 
+Cosine similarity of lambda: 1.00 
+lambda5_error: 1.31% 
+lambda8_error: 0.15% 
+Lambda L2 Error: 1.302496e-02 
+lambda_error_mean: 0.73% 
+lambda_error_std: 0.58% 
+The discovered equation: u_t = -1.0130891u*u_x+0.10015065u_xx
+
+Training Error u: 7.070202e-02 
+Validation Error u: 9.038776e-02 
+Training time: 523.1321 
+Full Field Error u: 4.328758e-02 
+Cosine similarity of lambda: 0.97 
+lambda5_error: 0.87% 
+lambda8_error: 11.10% 
+Lambda L2 Error: 2.556651e-01 
+lambda_error_mean: 5.98% 
+lambda_error_std: 5.12% 
+The discovered equation: u_t = -0.9913268u*u_x+0.088899195u_xx+0.10644437u**3*u_xx+0.060412075u*u_xxx+-0.19073491u**2*u_xxx+0.12024978u**3*u_xxx

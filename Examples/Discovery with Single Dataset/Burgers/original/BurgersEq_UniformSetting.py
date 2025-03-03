@@ -113,7 +113,7 @@ with tf.device('/device:GPU:0'):
             self.f_pred, self.Phi_pred, self.u_t_pred = self.net_f(self.x_f_tf, self.t_f_tf, self.x_f.shape[0])
             
             self.loss_u = tf.reduce_mean(tf.square(self.u_tf - self.u_pred))
-            self.loss_f_coeff_tf = tf.placeholder(tf.float32)
+            self.loss_f_coeff_tf = tf.placeholder(tf.float32) ### LOOK HERE: This is ALPHA
             self.loss_f = self.loss_f_coeff_tf*tf.reduce_mean(tf.square(self.f_pred))
             
             self.loss_lambda = 1e-7*tf.norm(self.lambda1, ord = 1)       
@@ -290,7 +290,7 @@ with tf.device('/device:GPU:0'):
                                                self.loss_val, self.loss_u_val, self.loss_f_val, self.lambda1],
                                     loss_callback = self.callback_Pretrain)
             
-            self.tf_dict[self.loss_f_coeff_tf] = 2
+            self.tf_dict[self.loss_f_coeff_tf] = 2 #### LOOK HERE: VALUE REPORTED IN THE PAPER FOR ALPHA AND BETA.
             for self.it in range(nIter):
                 
                 # Loop of STRidge optimization
@@ -565,9 +565,9 @@ with tf.device('/device:GPU:0'):
 # =============================================================================
 #         load data
 # =============================================================================
-        data = scipy.io.loadmat(os.path.dirname(os.getcwd()) + '\\burgers.mat')
+        # data = scipy.io.loadmat(os.path.dirname(os.getcwd()) + '\\burgers.mat')
         # data = scipy.io.loadmat(os.path.dirname(os.path.dirname(os.getcwd())) + '\\burgers.mat')
-        # data = scipy.io.loadmat('burgers.mat')
+        data = scipy.io.loadmat('burgers.mat')
         
         t = np.real(data['t'].flatten()[:,None])
         x = np.real(data['x'].flatten()[:,None])
@@ -600,7 +600,7 @@ with tf.device('/device:GPU:0'):
         u_meas = Exact0.flatten()[:,None]   
         
         # Training measurements, which are randomly sampled spatio-temporally
-        Split_TrainVal = 0.8
+        Split_TrainVal = 0.5
         N_u_train = int(X_u_meas.shape[0]*Split_TrainVal)
         idx_train = np.random.choice(X_u_meas.shape[0], N_u_train, replace=False)
         X_u_train = X_u_meas[idx_train,:]
